@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ValidatorPKComponent } from './validator-pk.component';
 import { ValidatorPkDirective } from './validator-pk.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   exports: [
     ValidatorPKComponent,

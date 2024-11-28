@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { validatePhoneNumber } from './validator-pk.service';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -14,7 +14,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
           (input)="onInputChange($event)"
           placeholder="Enter a phone number"
         />
-        <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+        <p *ngIf="errorMessage && showError" style="color: red;">{{ errorMessage }}</p>
       </div>
 
   `,
@@ -30,27 +30,27 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ValidatorPKComponent {
   @Output() isValid = new EventEmitter<boolean>();
-
+  @Input() errorMessage: string = '';
   phoneNumber: string = '';
-  errorMessage: string | null = null;
+  showError: boolean = false;
 
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
 
   onInputChange(event: Event) {
 
-    const inputElement = event.target as HTMLInputElement; // Cast to HTMLInputElement
-    const value = inputElement?.value || ''; // Safely get the value
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement?.value || '';
     this.phoneNumber = value;
-    this.onChange(this.phoneNumber); // Notify parent of changes
+    this.onChange(this.phoneNumber);
 
   
     const validation = validatePhoneNumber(this.phoneNumber);
     if (validation.isValid) {
-      this.errorMessage = null;
+      this.showError = false;
       this.isValid.emit(true);
     } else {
-      this.errorMessage = validation.error || 'Invalid phone number format';
+      this.showError = true;
       this.isValid.emit(false);
     }
   }

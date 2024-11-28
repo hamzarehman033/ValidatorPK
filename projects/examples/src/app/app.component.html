@@ -1,3 +1,7 @@
 <h1>ValidatorPK Demo</h1>
-<lib-validatorPK [(ngModel)]="phoneNumber" (isValid)="onValidityChange($event)"></lib-validatorPK>
+<lib-validatorPK 
+[(ngModel)]="phoneNumber" 
+(isValid)="onValidityChange($event)"
+[errorMessage]="'Invalid phone number!'"
+></lib-validatorPK>
 <p>Validated Phone Number will appear here.</p>
