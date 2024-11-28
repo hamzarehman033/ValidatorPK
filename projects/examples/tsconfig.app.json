@@ -3,7 +3,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "validatorPK": ["dist/validator-pk"]
+    }
   },
   "files": [
     "src/main.ts"

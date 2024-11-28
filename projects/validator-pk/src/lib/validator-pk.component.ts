@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <p>
       validator-pk works!
+      <input validatePhone placeholder="Enter phone number" />
     </p>
   `,
   styles: [
