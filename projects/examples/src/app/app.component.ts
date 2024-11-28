@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'examples';
+  phoneNumber: string = ''; 
+
+  onValidityChange(valid: boolean) {
+    console.log(valid);
+    
+  }
 }

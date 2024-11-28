@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ValidatorPKModule } from 'projects/validator-pk/src/public-api';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { ValidatorPKModule } from 'projects/validator-pk/src/public-api';
   ],
   imports: [
     BrowserModule,
-    ValidatorPKModule
+    ValidatorPKModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
