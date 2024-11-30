@@ -8,8 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'examples';
   phoneNumber: string = ''; 
+  cnic: string = ''; 
 
   isPhoneNumberValid: boolean = false;
+  isCNICValid: boolean = false;
   onValidityChange(valid: boolean) {
     console.log(valid);
     
