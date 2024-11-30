@@ -6,7 +6,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'lib-validatorPK',
   template: `
     <div>
-      <label for="phone">Phone Number:</label>
       <input
         id="phone"
         type="text"
