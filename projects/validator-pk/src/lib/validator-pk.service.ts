@@ -8,18 +8,17 @@ export class ValidatorPKService {
   constructor() { }
 }
 
-export function formatPhoneNumber(number: string) {
-  if (!validatePhoneNumber(number).isValid) {
-    return { error: 'Invalid phone number' };
+export function formatPhoneNumber(phoneNumber: string): string {
+  let formattedNumber = phoneNumber;
+  if (phoneNumber.startsWith('+92')) {
+    formattedNumber = phoneNumber.replace(/^(\+92)(\d{3})(\d{7})$/, '$1 $2 $3');
+  } else if (phoneNumber.startsWith('03')) {
+    formattedNumber = phoneNumber.replace(/^(03)(\d{3})(\d{7})$/, '$1$2 $3');
   }
-  return number.replace(/^0/, '+92').replace(/-/g, '');
+  return formattedNumber;
 }
 
-export function validatePhoneNumber(phone: string): { isValid: boolean; error?: string } {
-  const phoneRegex = /^(?:\+92|0092|0)?3[0-9]{2}[0-9]{7}$/;
-
-  if (!phoneRegex.test(phone)) {
-    return { isValid: false, error: 'Invalid phone number format' };
-  }
-  return { isValid: true };
+export function validatePhoneNumber(phoneNumber: string): { isValid: boolean } {
+  const validPattern = /^(\+92\s?\d{3}\s?\d{7}|03\d{2}\s?\d{7})$/; 
+  return { isValid: validPattern.test(phoneNumber.replace(/\s+/g, '')) };
 }

@@ -1,25 +1,23 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { validatePhoneNumber } from './validator-pk.service';
+import { formatPhoneNumber, validatePhoneNumber } from './validator-pk.service';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'lib-validatorPK',
   template: `
-        <div>
+    <div>
       <label for="phone">Phone Number:</label>
-        <input
-          id="phone"
-          type="text"
-          [value]="phoneNumber"
-          (input)="onInputChange($event)"
-          placeholder="Enter a phone number"
-        />
-        <p *ngIf="errorMessage && showError" style="color: red;">{{ errorMessage }}</p>
-      </div>
-
+      <input
+        id="phone"
+        type="text"
+        [value]="phoneNumber"
+        (input)="onInputChange($event)"
+        [placeholder]="placeholder"
+      />
+      <p *ngIf="errorMessage && showError" style="color: red;">{{ errorMessage }}</p>
+    </div>
   `,
-  styles: [
-  ],
+  styles: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -31,6 +29,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class ValidatorPKComponent {
   @Output() isValid = new EventEmitter<boolean>();
   @Input() errorMessage: string = '';
+  @Input() placeholder: string = 'Enter a phone number';
+  @Input() autoFormat: boolean = false;
   phoneNumber: string = '';
   showError: boolean = false;
 
@@ -38,21 +38,21 @@ export class ValidatorPKComponent {
   private onTouched: () => void = () => {};
 
   onInputChange(event: Event) {
-
     const inputElement = event.target as HTMLInputElement;
-    const value = inputElement?.value || '';
+    let value = inputElement?.value || '';
     this.phoneNumber = value;
-    this.onChange(this.phoneNumber);
 
-  
     const validation = validatePhoneNumber(this.phoneNumber);
-    if (validation.isValid) {
-      this.showError = false;
-      this.isValid.emit(true);
-    } else {
-      this.showError = true;
-      this.isValid.emit(false);
+    const isValid = validation.isValid;
+
+    if (isValid && this.autoFormat) {
+      this.phoneNumber = formatPhoneNumber(this.phoneNumber);
+      value = this.phoneNumber;
     }
+
+    this.onChange(value);
+    this.isValid.emit(isValid);
+    this.showError = !isValid;
   }
 
   writeValue(value: string): void {
