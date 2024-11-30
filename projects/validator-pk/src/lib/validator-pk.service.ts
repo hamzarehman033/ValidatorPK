@@ -13,7 +13,7 @@ export function formatPhoneNumber(phoneNumber: string): string {
   if (phoneNumber.startsWith('+92')) {
     formattedNumber = phoneNumber.replace(/^(\+92)(\d{3})(\d{7})$/, '$1 $2 $3');
   } else if (phoneNumber.startsWith('03')) {
-    formattedNumber = phoneNumber.replace(/^(03)(\d{3})(\d{7})$/, '$1$2 $3');
+    formattedNumber = phoneNumber.replace(/^(03)(\d{2})(\d{7})$/, '$1$2 $3');
   }
   return formattedNumber;
 }

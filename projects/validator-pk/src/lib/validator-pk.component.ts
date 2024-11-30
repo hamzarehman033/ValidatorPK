@@ -27,10 +27,23 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class ValidatorPKComponent {
-  @Output() isValid = new EventEmitter<boolean>();
+  @Output() validChange = new EventEmitter<boolean>();
   @Input() errorMessage: string = '';
   @Input() placeholder: string = 'Enter a phone number';
   @Input() autoFormat: boolean = false;
+
+  private isValid: boolean = false;
+
+  @Input()
+  get valid(): boolean {
+    return this.isValid;
+  }
+
+  // Prevent external modification of `valid`
+  set valid(value: boolean) {
+    console.warn('valid is read-only and cannot be set externally.');
+  }
+
   phoneNumber: string = '';
   showError: boolean = false;
 
@@ -43,16 +56,16 @@ export class ValidatorPKComponent {
     this.phoneNumber = value;
 
     const validation = validatePhoneNumber(this.phoneNumber);
-    const isValid = validation.isValid;
+    this.isValid = validation.isValid;
 
-    if (isValid && this.autoFormat) {
+    if (this.isValid && this.autoFormat) {
       this.phoneNumber = formatPhoneNumber(this.phoneNumber);
       value = this.phoneNumber;
     }
 
     this.onChange(value);
-    this.isValid.emit(isValid);
-    this.showError = !isValid;
+    this.validChange.emit(this.isValid);
+    this.showError = !this.isValid;
   }
 
   writeValue(value: string): void {
