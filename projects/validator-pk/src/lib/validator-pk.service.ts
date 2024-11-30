@@ -22,3 +22,13 @@ export function validatePhoneNumber(phoneNumber: string): { isValid: boolean } {
   const validPattern = /^(\+92\s?\d{3}\s?\d{7}|03\d{2}\s?\d{7})$/; 
   return { isValid: validPattern.test(phoneNumber.replace(/\s+/g, '')) };
 }
+
+export function validateCNIC(cnic: string): { isValid: boolean } {
+  const cnicRegex = /^\d{5}-?\d{7}-?\d$/;
+  return { isValid: cnicRegex.test(cnic) }; 
+}
+
+export function formatCNIC(cnic: string): string {
+  const sanitizedCNIC = cnic.replace(/-/g, '');
+  return sanitizedCNIC.replace(/^(\d{5})(\d{7})(\d)$/, '$1-$2-$3');
+}
