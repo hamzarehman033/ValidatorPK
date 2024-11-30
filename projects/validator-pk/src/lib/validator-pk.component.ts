@@ -1,5 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { formatPhoneNumber, validatePhoneNumber } from './validator-pk.service';
+import { formatCNIC, formatPhoneNumber, validateCNIC, validatePhoneNumber } from './validator-pk.service';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -31,6 +31,7 @@ export class ValidatorPKComponent {
   @Input() errorMessage: string = '';
   @Input() placeholder: string = 'Enter a phone number';
   @Input() autoFormat: boolean = false;
+  @Input() type: 'phone' | 'cnic' = 'phone';
 
   private isValid: boolean = false;
 
@@ -55,12 +56,21 @@ export class ValidatorPKComponent {
     let value = inputElement?.value || '';
     this.phoneNumber = value;
 
-    const validation = validatePhoneNumber(this.phoneNumber);
-    this.isValid = validation.isValid;
+    if (this.type === 'phone') {
+      const validation = validatePhoneNumber(this.phoneNumber);
+      this.isValid = validation.isValid;
 
-    if (this.isValid && this.autoFormat) {
-      this.phoneNumber = formatPhoneNumber(this.phoneNumber);
-      value = this.phoneNumber;
+      if (this.isValid && this.autoFormat) {
+        this.phoneNumber = formatPhoneNumber(this.phoneNumber);
+        value = this.phoneNumber;
+      }
+    } else if (this.type === 'cnic') {
+      const validation = validateCNIC(this.phoneNumber);
+      this.isValid = validation.isValid;
+      if (this.isValid && this.autoFormat) {
+        this.phoneNumber = formatCNIC(this.phoneNumber);
+        value = this.phoneNumber;
+      }
     }
 
     this.onChange(value);
