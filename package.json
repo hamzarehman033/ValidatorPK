@@ -1,6 +1,6 @@
 {
   "name": "validator-pk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A lightweight library for validating and formatting Pakistani phone numbers and CNIC.",
   "main": "dist/validator-pk/bundles/validator-pk.umd.js",
   "typings": "dist/validator-pk/validator-pk.d.ts",
@@ -11,7 +11,15 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "keywords": ["angular", "react", "validation", "pakistan", "phone", "cnic", "format"],
+  "keywords": [
+    "angular",
+    "react",
+    "validation",
+    "pakistan",
+    "phone",
+    "cnic",
+    "format"
+  ],
   "author": "Your Name",
   "license": "MIT",
   "private": false,
