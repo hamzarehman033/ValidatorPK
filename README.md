@@ -1,27 +1,150 @@
 # ValidatorPK
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.10.
+**ValidatorPK** is an Angular library for validating and formatting Pakistani phone numbers and CNICs. This library simplifies handling common validation tasks and ensures proper formatting with minimal effort.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Validate Pakistani phone numbers (with or without spaces).
+- Format phone numbers automatically (`+92 300 1234567` or `0300 1234567`).
+- Validate CNICs (with or without hyphens).
+- Format CNICs automatically (`12345-1234567-1`).
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Installation
 
-## Build
+Install the package via npm:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install validatorpk
+```
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Usage
 
-## Running end-to-end tests
+### Import the Module
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Add the `ValidatorPKModule` to your Angular module:
 
-## Further help
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { ValidatorPKModule } from 'validatorpk';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, ValidatorPKModule],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+---
+
+### Basic Usage
+
+Use the `<lib-validatorPK>` component in your template. You can validate both **phone numbers** and **CNICs** using the `type` input property.
+
+#### Phone Number Validation
+
+```html
+<lib-validatorPK
+  [type]="'phone'"
+  [(ngModel)]="phoneNumber"
+  [(valid)]="isPhoneNumberValid"
+  [errorMessage]="'Please enter a valid phone number!'"
+  [placeholder]="'Enter your phone number'"
+  [autoFormat]="true"
+></lib-validatorPK>
+```
+
+#### CNIC Validation
+
+```html
+<lib-validatorPK
+  [type]="'cnic'"
+  [(ngModel)]="cnic"
+  [(valid)]="isCNICValid"
+  [errorMessage]="'Please enter a valid CNIC!'"
+  [placeholder]="'Enter your CNIC'"
+  [autoFormat]="true"
+></lib-validatorPK>
+```
+
+---
+
+### Inputs
+
+| Input          | Type      | Default                 | Description                                                              |
+|-----------------|-----------|-------------------------|--------------------------------------------------------------------------|
+| `type`         | `string`  | `'phone'`               | Specifies whether to validate a `phone` or `cnic`.                      |
+| `errorMessage` | `string`  | `''`                    | The error message displayed for invalid input.                          |
+| `placeholder`  | `string`  | `'Enter value'`         | Placeholder text for the input field.                                   |
+| `autoFormat`   | `boolean` | `false`                 | If `true`, automatically formats the input when it's valid.             |
+
+---
+
+### Outputs
+
+| Output       | Type          | Description                                                             |
+|--------------|---------------|-------------------------------------------------------------------------|
+| `[(valid)]`  | `boolean`     | Two-way binding to track the validity of the input (phone or CNIC). Emits `true` if valid, `false` if invalid.  |
+
+---
+
+---
+
+### Formatting Rules
+
+- **Phone Numbers**
+  - Input: `+923001234567` → Output: `+92 300 1234567`
+  - Input: `03001234567` → Output: `0300 1234567`
+
+- **CNIC**
+  - Input: `1234512345671` → Output: `12345-1234567-1`
+
+---
+
+## Development
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-repo/validatorpk.git
+cd validatorpk
+```
+
+### Build the Library
+
+```bash
+ng build validator-pk
+```
+
+### Run Tests
+
+```bash
+ng test validator-pk
+```
+
+---
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+## Author
+
+Developed by **Hamza Rehman**. Feel free to reach out for any feedback or collaboration!
+
+---
