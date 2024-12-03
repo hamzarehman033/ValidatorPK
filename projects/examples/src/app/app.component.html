@@ -1,20 +1,26 @@
-<h1>ValidatorPK Demo</h1>
-<h2>Phone CNIC</h2>
-<lib-validatorPK 
-  [type]="'phone'"
-  [(ngModel)]="phoneNumber" 
-  [(valid)]="isPhoneNumberValid" 
-  [errorMessage]="'Please enter a valid phone number!'" 
-  [placeholder]="'Enter your phone number'" 
-  [autoFormat]="true"
-></lib-validatorPK>
+<div class="w-50 m-auto">
+  <div class="card p-3">
+    <h1>ValidatorPK Demo</h1>
+    <h4>Phone CNIC</h4>
+    <lib-validatorPK 
+      [type]="'phone'"
+      [(ngModel)]="phoneNumber" 
+      [(valid)]="isPhoneNumberValid" 
+      [errorMessage]="'Please enter a valid phone number!'" 
+      [placeholder]="'Enter your phone number'" 
+      [autoFormat]="true"
+      [class]="'form-control'"
+    ></lib-validatorPK>
 
-<h2>CNIC Validation</h2>
-<lib-validatorPK 
-  [type]="'cnic'"
-  [(ngModel)]="cnic" 
-  [(valid)]="isCNICValid" 
-  [errorMessage]="'Please enter a valid CNIC'" 
-  [placeholder]="'Enter your CNIC'" 
-  [autoFormat]="true"
-></lib-validatorPK>
+    <h4>CNIC Validation</h4>
+    <lib-validatorPK 
+      [type]="'cnic'"
+      [(ngModel)]="cnic" 
+      [(valid)]="isCNICValid" 
+      [errorMessage]="'Please enter a valid CNIC'" 
+      [placeholder]="'Enter your CNIC'" 
+      [autoFormat]="true"
+      [class]="'form-control'"
+    ></lib-validatorPK>
+  </div>
+</div>

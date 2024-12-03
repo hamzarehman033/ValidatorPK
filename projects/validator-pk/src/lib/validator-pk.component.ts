@@ -5,16 +5,20 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'lib-validatorPK',
   template: `
-    <div>
+    <ng-container>
       <input
         id="phone"
         type="text"
+        [class]="class"
+        [ngClass]="{
+          'is-invalid': showError
+        }"
         [value]="phoneNumber"
         (input)="onInputChange($event)"
         [placeholder]="placeholder"
       />
       <p *ngIf="errorMessage && showError" style="color: red;">{{ errorMessage }}</p>
-    </div>
+    </ng-container>
   `,
   styles: [],
   providers: [
@@ -28,6 +32,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class ValidatorPKComponent {
   @Output() validChange = new EventEmitter<boolean>();
   @Input() errorMessage: string = '';
+  @Input() class: string = '';
   @Input() placeholder: string = 'Enter a phone number';
   @Input() autoFormat: boolean = false;
   @Input() type: 'phone' | 'cnic' = 'phone';
