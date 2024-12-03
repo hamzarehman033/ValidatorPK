@@ -63,7 +63,8 @@
               "projects/examples/src/assets"
             ],
             "styles": [
-              "projects/examples/src/styles.scss"
+              "projects/examples/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
