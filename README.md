@@ -76,6 +76,35 @@ Use the `<lib-validatorPK>` component in your template. You can validate both **
 
 ---
 
+### Adding Custom Classes  
+
+You can pass custom classes from the parent component for styling the input field. Additionally, a default `invalid` class is applied when the input is invalid.
+
+```html
+<lib-validatorPK 
+  [type]="'phone'"
+  [(ngModel)]="phoneNumber" 
+  [(valid)]="isPhoneNumberValid" 
+  [errorMessage]="'Please enter a valid phone number!'" 
+  [placeholder]="'Enter your phone number'" 
+  [class]="'my-custom-class'"
+  [autoFormat]="true"
+></lib-validatorPK>
+```
+
+### Handling `invalid` Class  
+
+The library automatically adds the `invalid` class when the input value is invalid. This can be used for conditional styling:
+
+```css
+.invalid {
+  border-color: red;
+  background-color: #ffe6e6;
+}
+```
+
+---
+
 ### Inputs
 
 | Input          | Type      | Default                 | Description                                                              |
@@ -84,6 +113,7 @@ Use the `<lib-validatorPK>` component in your template. You can validate both **
 | `errorMessage` | `string`  | `''`                    | The error message displayed for invalid input.                          |
 | `placeholder`  | `string`  | `'Enter value'`         | Placeholder text for the input field.                                   |
 | `autoFormat`   | `boolean` | `false`                 | If `true`, automatically formats the input when it's valid.             |
+| `class`        | `string`  | `''`                    | Custom CSS classes to apply to the input field. The `invalid` class is automatically added for invalid inputs. |
 
 ---
 
