@@ -76,6 +76,22 @@ Use the `<lib-validatorPK>` component in your template. You can validate both **
 
 ---
 
+### Using with Reactive Forms
+
+To use `lib-validatorPK` with Reactive Forms:
+
+1. **Set Up a Reactive Form**: Create a `FormGroup` and define a `FormControl` for the field where `lib-validatorPK` will be used.
+
+2. **Bind `FormControl`**: Use the `formControlName` directive to bind the `FormControl` to the `lib-validatorPK` component.
+
+3. **Validation Integration**: The component integrates seamlessly with Angular's reactive validation. Ensure the `FormControl` has appropriate validators to handle additional custom validation logic if needed.
+
+4. **Access Form Values and State**: Use the form or control instance (`form.get('controlName')`) to access values, check validity, and display error messages dynamically.
+
+This allows `lib-validatorPK` to work smoothly within Reactive Forms without additional configurations.
+
+---
+
 ### Adding Custom Classes  
 
 You can pass custom classes from the parent component for styling the input field. Additionally, a default `invalid` class is applied when the input is invalid.
