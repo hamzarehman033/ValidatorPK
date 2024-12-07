@@ -1,6 +1,6 @@
 {
   "name": "validator-pk",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A lightweight library for validating and formatting Pakistani phone numbers and CNIC.",
   "main": "dist/validator-pk/bundles/validator-pk.umd.js",
   "typings": "dist/validator-pk/validator-pk.d.ts",
