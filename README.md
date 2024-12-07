@@ -16,7 +16,7 @@
 Install the package via npm:
 
 ```bash
-npm install validatorpk
+npm install validator-pk
 ```
 
 ---
